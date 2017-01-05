@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Main from "./app/views/main.view";
+import Main from "./app/views/Main";
 
 ReactDOM.render(
   <Main />,

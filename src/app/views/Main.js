@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "datejs";
+import GameList from "../components/GameList";
+
+const styles = {
+    container: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%"
+    }
+};
 
 class Main extends Component {
     constructor(props) {
@@ -33,12 +44,8 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.games.map((game) => {
-                    let homeTeam = game.home.nickname;
-                    let awayTeam = game.visitor.nickname;
-                    return <div key={game.id}>{homeTeam} vs {awayTeam}</div>
-                })}
+            <div style={styles.container}>
+                <GameList games={this.state.games} />
             </div>
         );
     }
