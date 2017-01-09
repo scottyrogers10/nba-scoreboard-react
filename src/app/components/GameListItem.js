@@ -7,7 +7,7 @@ let styles = {
         position: "relative",
         height: "100px",
         width: "400px",
-        backgroundColor: "#f2f2f2",
+        backgroundColor: "#fff",
         borderRadius: "4px",
         margin: "8px 0"
     },

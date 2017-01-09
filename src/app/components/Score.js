@@ -12,7 +12,6 @@ const styles = {
         position: "absolute",
         left: 0,
         width: "30%",
-        height: "100%",
         textAlign: "center",
         paddingTop: "50px",
         fontSize: "20px"
@@ -21,7 +20,6 @@ const styles = {
         position: "absolute",
         left: "30%",
         width: "40%",
-        height: "100%",
         textAlign: "center",
         color: "#c62828",
         paddingTop: "16px"
@@ -30,7 +28,6 @@ const styles = {
         position: "absolute",
         left: "70%",
         width: "30%",
-        height: "100%",
         textAlign: "center",
         paddingTop: "50px",
         fontSize: "20px"

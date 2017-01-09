@@ -9,7 +9,8 @@ const styles = {
         top: 0,
         left: 0,
         width: "100%",
-        height: "100%"
+        height: "100%",
+        overflowY: "scroll"
     }
 };
 
@@ -17,20 +18,24 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            games: []
+            games: [],
+            date: new Date()
         };
+
+        this.onDateChange = this.onDateChange.bind(this);
     }
 
-    getGamesTodayAsync() {
-        let today = new Date().toString("yyyyMMdd");
-        let proxy = "https://crossorigin.me/";
-        let scoreboardUrl = "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/" + today + "/games.json";
+    getGamesAsync(date) {
+        let currentDate = date.toString("yyyyMMdd");
+        let proxy = "http://127.0.0.1:3005/proxy";
+        let scoreboardUrl = "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/" + currentDate + "/games.json";
 
-        return axios.get(proxy + scoreboardUrl).then((result) => {
+        return axios.get(proxy + "?url=" + scoreboardUrl).then((result) => {
             let games = result.data["sports_content"]["games"]["game"];
             console.log(games);
             this.setState({
-                games: games
+                games: games,
+                date: date
             });
         }).catch((error) => {
             //TODO: Error Handling
@@ -38,14 +43,19 @@ class Main extends Component {
         });
     }
 
+    onDateChange(changeValue) {
+        let newDate = this.state.date.add({days: changeValue});
+        this.getGamesAsync(newDate);
+    }
+
     componentDidMount() {
-        this.getGamesTodayAsync();
+        this.getGamesAsync(this.state.date);
     }
 
     render() {
         return (
             <div style={styles.container}>
-                <GameList games={this.state.games} />
+                <GameList games={this.state.games} date={this.state.date} onDateChange={this.onDateChange}/>
             </div>
         );
     }
